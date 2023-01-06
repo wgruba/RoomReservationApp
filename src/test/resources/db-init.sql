@@ -1,4 +1,4 @@
-CREATE TABLE rooms (
+CREATE TABLE IF NOT EXISTS rooms (
 id bigint NOT NULL AUTO_INCREMENT,
 room_type int NOT NULL,
 hotel_id bigint NOT NULL,

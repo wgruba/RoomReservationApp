@@ -2,7 +2,6 @@ package com.kgs.RoomReservationApp.Dao;
 
 import com.kgs.RoomReservationApp.Model.Room;
 import com.kgs.RoomReservationApp.Model.RoomType;
-import jakarta.annotation.PostConstruct;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
