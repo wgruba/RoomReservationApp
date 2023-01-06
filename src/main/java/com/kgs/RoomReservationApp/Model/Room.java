@@ -6,10 +6,10 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Room {
-    private long id;
-    private RoomType roomType;
-    private long hotelId;
-    private int maxPeopleNumber;
-    private float dailyPrice;
-    private String description;
+  private long id;
+  private RoomType roomType;
+  private long hotelId;
+  private int maxPeopleNumber;
+  private double dailyPrice;
+  private String description;
 }
