@@ -19,13 +19,13 @@
                 <th class="text-center"></th>
               </tr>
               </thead>
-              <tbody>
+              <tbody style="padding: 15px 0">
               <tr th:each="reservation : ${reservations}">
                 <td class="text-center"th:text= "${reservation.reservation().getStart()}"></td>
                 <td class="text-center" th:text= "${reservation.peopleNumber()}"></td>
                 <td class="text-center" th:text= "${reservation.reservation().getStatus()}"></td>
                 <td class="text-center" th:text= "${reservation.getFullPayment()}"></td>
-                <td><a class="btn btn-primary" th:href="@{/reservations/{reservationId}/details(reservationId=${reservation.reservation().getId()})}">Szczegóły</a></td>
+                <td><a class="btn btn-lg btn-primary" th:href="@{/reservations/details(id=${reservation.reservation().getId()})}">Szczegóły</a></td>
               </tr>
               </tbody>
             </table>

@@ -6,6 +6,7 @@ import com.kgs.RoomReservationApp.model.ReservationWithDetails;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -28,6 +29,21 @@ public class ReservationDao {
         """,
         this::mapToReservationWithDetails,
         userId);
+  }
+
+  public Optional<ReservationWithDetails> getWithDetailsById(long reservationId) {
+    return Optional.ofNullable(
+        jdbcTemplate.queryForObject(
+            """
+                  SELECT res.*, rooms.max_people_number, rooms.daily_price, types.type_name FROM reservations res
+                  JOIN room_reservation rr ON res.id = rr.reservation_id
+                  JOIN rooms ON rr.room_id  = rooms.id
+                  JOIN room_types types ON rooms.room_type_id = types.id
+                  WHERE res.id = ?
+                  ORDER BY res.start DESC
+            """,
+            this::mapToReservationWithDetails,
+            reservationId));
   }
 
   private Reservation mapToReservation(ResultSet rs, int rowNum) throws SQLException {
