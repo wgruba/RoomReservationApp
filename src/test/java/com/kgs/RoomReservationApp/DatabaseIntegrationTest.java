@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.kgs.RoomReservationApp.Dao.RoomDao;
 import com.kgs.RoomReservationApp.Model.Room;
-import com.kgs.RoomReservationApp.Model.RoomType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,7 @@ public class DatabaseIntegrationTest {
   @Test
   void shouldGetRoom() {
     var rooms = roomDao.getAll();
-    var expected = new Room(1L, RoomType.Single, 1L, 1, 100.0, "Regular single room");
+    var expected = new Room(1L, "Single", 1L, 1, 100.0, "Regular single room");
 
     assertEquals(expected, rooms.get(0));
   }
