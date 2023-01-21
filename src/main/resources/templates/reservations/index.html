@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="_shared/_layout">
+
+<title layout:fragment="title">KGW - moje rezerwacje</title>
+
+<div layout:fragment="content">
+  <div class="content">
+            <table class="display table table-bordered" style="width:800px">
+              <thead class="text-center">
+              <tr>
+                <th class="text-center">Początek rezerwacji</th>
+                <th class="text-center">Liczba osób</th>
+                <th class="text-center">Status</th>
+                <th class="text-center">Kwota płatności</th>
+                <th class="text-center"></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="reservation : ${reservations}">
+                <td class="text-center"th:text= "${reservation.getName()}"></td>
+                <td class="text-center" th:text= "${reservation.getWeight()}"></td>
+                <td class="text-center" th:text= "${reservation.getPrice()}"></td>
+                <td class="text-center" th:text= "${reservation.getCategory().getName()}"></td>
+                <td><a class="btn btn-primary" th:href="@{/reservations/{productId}/add(productId=${product.getId()})}">Szczegóły</a></td>
+              </tr>
+              </tbody>
+            </table>
+  </div>
+</div>
+</html>
