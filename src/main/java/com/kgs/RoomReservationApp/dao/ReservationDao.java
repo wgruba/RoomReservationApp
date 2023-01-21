@@ -19,11 +19,12 @@ public class ReservationDao {
   public List<ReservationWithDetails> getAllWithDetailsByClientId(long userId) {
     return jdbcTemplate.query(
         """
-          SELECT r.*, r2.max_people_number, r2.daily_price, rt.type_name FROM reservations r
-          JOIN room_reservation rr ON r.id = rr.reservation_id
-          JOIN rooms r2 ON r.id = r2.id
-          JOIN room_types rt ON r2.id = rt.id
-          WHERE r.id = ?
+              SELECT res.*, rooms.max_people_number, rooms.daily_price, types.type_name FROM reservations res
+              JOIN room_reservation rr ON res.id = rr.reservation_id
+              JOIN rooms ON rr.room_id  = rooms.id
+              JOIN room_types types ON rooms.room_type_id = types.id
+              WHERE res.user_id = ?
+              ORDER BY res.start DESC
         """,
         this::mapToReservationWithDetails,
         userId);
@@ -45,6 +46,6 @@ public class ReservationDao {
         mapToReservation(rs, rowNum),
         rs.getInt("max_people_number"),
         rs.getFloat("daily_price"),
-        rs.getString("room_type"));
+        rs.getString("type_name"));
   }
 }

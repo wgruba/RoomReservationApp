@@ -1,14 +1,10 @@
 <header th:fragment="header">
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default" style="background: #E9FFFE; border-color: black; siz">
         <div class="container-fluid">
-            <img src="../static/img/logo.png" th:src="@{img/logo.png}"/>
-<!--            <div class="navbar-header">-->
-<!--                <a class="navbar-brand" href="/">Strona główna</a>-->
-<!--            </div>-->
-            <ul class="nav navbar-nav">
-                <li><a href="/product/">Home</a></li>
-                <li><a href="/product/add">My account</a></li>
-            </ul>
+            <div class="navbar-header">
+                <img src="../../static/images/logo.png" th:src="@{/images/logo.png}"/>
+            </div>
+            <p class="navbar-text navbar-right"><a class="navbar-link" style="font-size: 25px; padding-right: 10px;"><strong>Moje konto</strong></a></p>
         </div>
     </nav>
 </header>

@@ -20,4 +20,9 @@ public class Client extends User {
   public String getRoles() {
     return "CLIENT";
   }
+
+  @Override
+  public boolean isActive() {
+    return true;
+  }
 }

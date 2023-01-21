@@ -8,7 +8,8 @@
 
 <div layout:fragment="content">
   <div class="content">
-            <table class="display table table-bordered" style="width:800px">
+    <div class="table-responsive center-block">
+            <table class="table">
               <thead class="text-center">
               <tr>
                 <th class="text-center">Początek rezerwacji</th>
@@ -22,12 +23,13 @@
               <tr th:each="reservation : ${reservations}">
                 <td class="text-center"th:text= "${reservation.reservation().getStart()}"></td>
                 <td class="text-center" th:text= "${reservation.peopleNumber()}"></td>
-                <td class="text-center" th:text= "${reservation.getPrice()}"></td>
                 <td class="text-center" th:text= "${reservation.reservation().getStatus()}"></td>
-                <td><a class="btn btn-primary" th:href="@{/reservations/{reservationId}/add(reservationId=${reservation.reservation().getId()})}">Szczegóły</a></td>
+                <td class="text-center" th:text= "${reservation.getFullPayment()}"></td>
+                <td><a class="btn btn-primary" th:href="@{/reservations/{reservationId}/details(reservationId=${reservation.reservation().getId()})}">Szczegóły</a></td>
               </tr>
               </tbody>
             </table>
+    </div>
   </div>
 </div>
 </html>

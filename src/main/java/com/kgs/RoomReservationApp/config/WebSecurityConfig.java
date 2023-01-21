@@ -15,12 +15,7 @@ public class WebSecurityConfig {
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http.authorizeHttpRequests(
-            (requests) ->
-                requests
-                    .requestMatchers("/")
-                    .permitAll()
-                    .requestMatchers("/reservations/*")
-                    .hasAnyRole("CLIENT", "ADMIN", "EMPLOYEE"))
+            (requests) -> requests.requestMatchers("/").permitAll().anyRequest().authenticated())
         .formLogin();
 
     return http.build();

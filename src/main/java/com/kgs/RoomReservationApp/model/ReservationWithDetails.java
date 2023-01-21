@@ -6,7 +6,7 @@ public record ReservationWithDetails(
     Reservation reservation, int peopleNumber, double dailyRoomPrice, String roomType) {
 
   public long getStayDays() {
-    return Duration.between(reservation.getEnd(), reservation.getStart()).toDays();
+    return Duration.between(reservation.getStart(), reservation.getEnd()).toDays() + 1;
   }
 
   public double getFullPayment() {
