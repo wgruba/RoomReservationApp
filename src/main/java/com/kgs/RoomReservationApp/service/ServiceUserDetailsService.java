@@ -1,8 +1,8 @@
-package com.kgs.RoomReservationApp.Service;
+package com.kgs.RoomReservationApp.service;
 
-import com.kgs.RoomReservationApp.Dao.ClientDao;
-import com.kgs.RoomReservationApp.Model.Client;
-import com.kgs.RoomReservationApp.Model.ServiceUserDetails;
+import com.kgs.RoomReservationApp.dao.ClientDao;
+import com.kgs.RoomReservationApp.model.Client;
+import com.kgs.RoomReservationApp.model.ServiceUserDetails;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

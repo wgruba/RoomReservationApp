@@ -1,6 +1,6 @@
-package com.kgs.RoomReservationApp.Dao;
+package com.kgs.RoomReservationApp.dao;
 
-import com.kgs.RoomReservationApp.Model.Client;
+import com.kgs.RoomReservationApp.model.Client;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;

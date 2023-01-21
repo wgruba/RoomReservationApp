@@ -1,4 +1,4 @@
-package com.kgs.RoomReservationApp.Model;
+package com.kgs.RoomReservationApp.model;
 
 import lombok.Data;
 

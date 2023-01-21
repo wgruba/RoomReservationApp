@@ -20,11 +20,11 @@
               </thead>
               <tbody>
               <tr th:each="reservation : ${reservations}">
-                <td class="text-center"th:text= "${reservation.getName()}"></td>
-                <td class="text-center" th:text= "${reservation.getWeight()}"></td>
+                <td class="text-center"th:text= "${reservation.reservation().getStart()}"></td>
+                <td class="text-center" th:text= "${reservation.peopleNumber()}"></td>
                 <td class="text-center" th:text= "${reservation.getPrice()}"></td>
-                <td class="text-center" th:text= "${reservation.getCategory().getName()}"></td>
-                <td><a class="btn btn-primary" th:href="@{/reservations/{productId}/add(productId=${product.getId()})}">Szczegóły</a></td>
+                <td class="text-center" th:text= "${reservation.reservation().getStatus()}"></td>
+                <td><a class="btn btn-primary" th:href="@{/reservations/{reservationId}/add(reservationId=${reservation.reservation().getId()})}">Szczegóły</a></td>
               </tr>
               </tbody>
             </table>

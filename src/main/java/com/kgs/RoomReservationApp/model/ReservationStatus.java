@@ -1,4 +1,4 @@
-package com.kgs.RoomReservationApp.Model;
+package com.kgs.RoomReservationApp.model;
 
 public enum ReservationStatus {
   SUSPENDED(0),
