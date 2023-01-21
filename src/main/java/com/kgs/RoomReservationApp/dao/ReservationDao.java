@@ -46,6 +46,10 @@ public class ReservationDao {
             reservationId));
   }
 
+  public void cancel(long reservationId) {
+    jdbcTemplate.update("UPDATE reservations SET status = 3 WHERE id = ?", reservationId);
+  }
+
   private Reservation mapToReservation(ResultSet rs, int rowNum) throws SQLException {
     return new Reservation(
         rs.getLong("id"),

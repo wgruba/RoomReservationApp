@@ -27,4 +27,10 @@ public class ReservationController {
     model.addAttribute("reservation", reservationService.getById(inputId));
     return "/reservations/details";
   }
+
+  @GetMapping("/reservations/cancel")
+  public String cancel(@RequestParam("id") long inputId) {
+    reservationService.cancel(inputId);
+    return "redirect:/reservations/details?id=" + inputId;
+  }
 }

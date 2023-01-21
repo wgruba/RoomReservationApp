@@ -22,13 +22,15 @@
 
       <div style="padding-left: 30px;">
         Ilość osób: <text th:text="*{peopleNumber()}"></text><br><br>
-        Rodzaj pokoju <text th:text="*{roomType()}"></text><br><br>
-        Status <text th:text="*{reservation().getStatus()}"></text><br><br>
-        Cena <text th:text="*{getFullPayment()}"></text> zł
+        Rodzaj pokoju: <text th:text="*{roomType()}"></text><br><br>
+        Status: <text th:text="*{reservation().getStatus()}"></text><br><br>
+        Cena: <text th:text="*{getFullPayment()}"></text> zł
       </div>
     </div>
 
-    <p align="right" style="margin-right:20px"><button type="button" class="btn btn-lg btn-danger" style="">Anuluj</button></p>
+    <p align="right" style="margin-right:20px">
+      <a class="btn btn-lg btn-danger" th:href="@{/reservations/cancel(id=${reservation.reservation().getId()})}">Anuluj</a>
+    </p>
 
   </div>
 </div>
