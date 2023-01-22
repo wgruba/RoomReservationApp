@@ -1,7 +1,7 @@
-package com.kgs.RoomReservationApp.Controller;
+package com.kgs.RoomReservationApp.controller;
 
-import com.kgs.RoomReservationApp.Model.Room;
-import com.kgs.RoomReservationApp.Service.RoomService;
+import com.kgs.RoomReservationApp.model.Room;
+import com.kgs.RoomReservationApp.service.RoomService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

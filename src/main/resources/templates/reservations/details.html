@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="_shared/_layout">
+
+<title layout:fragment="title">KGW - szczegóły rezerwacji</title>
+
+<div layout:fragment="content">
+  <div class="content">
+    <h1 style="padding-left: 20px;"><strong>Dane rezerwacji</strong></h1>
+    <hr style="height:2px; border-width:1px; color:black; background-color:black">
+
+    <div th:object="${reservation}">
+      <div style="padding-left: 30px;">
+        Zameldowanie: <text th:text="*{reservation().getStart()}"></text><br><br>
+        Wymeldowanie: <text th:text="*{reservation().getEnd()}"></text><br><br>
+        Całkowita długość pobytu: <text th:text="*{getStayDays()}"></text> dni
+      </div>
+
+      <hr style="height:2px; border-width:1px; color:black; background-color:black">
+
+      <div style="padding-left: 30px;">
+        Ilość osób: <text th:text="*{peopleNumber()}"></text><br><br>
+        Rodzaj pokoju: <text id="room_type" th:text="*{roomType()}"></text><br><br>
+        Status: <text id="status" th:text="*{reservation().getStatus()}"></text><br><br>
+        Cena: <text th:text="*{getFullPayment()}"></text> zł
+      </div>
+    </div>
+
+    <div class="text-right" style="margin-right:20px">
+      <button type="button" class="btn btn-lg btn-danger" data-toggle="modal" data-target="#cancelModal">Anuluj</button>
+    </div>
+
+    <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="background-color: #308CBF; color: white">
+          <div class="modal-body">
+            <br><br>
+            <p class="text-center">Czy na pewno chcesz odwołać rezerwację?</p>
+            <br><br>
+          </div>
+          <div class="modal-footer">
+            <a class="btn btn-lg btn-danger" th:href="@{/reservations/cancel(id=${reservation.reservation().getId()})}">Tak</a>
+            <button type="button" class="btn btn-lg btn-primary" data-dismiss="modal">Nie</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</html>
