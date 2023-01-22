@@ -31,7 +31,3 @@ ALTER TABLE employee_changes ADD CONSTRAINT FKemployee_c318475 FOREIGN KEY (admi
 ALTER TABLE employee_changes ADD CONSTRAINT FKemployee_c358409 FOREIGN KEY (employee_id) REFERENCES employees (id);
 ALTER TABLE reservation_operations ADD CONSTRAINT FKreservatio360105 FOREIGN KEY (employee_id) REFERENCES employees (id);
 ALTER TABLE reservation_operations ADD CONSTRAINT FKreservatio733475 FOREIGN KEY (reservation_id) REFERENCES reservations (id);
-
-INSERT INTO hotels VALUES (1, 'city', 'addres');
-INSERT INTO room_types VALUES (1, 'Regular');
-INSERT INTO rooms VALUES (1, 1, 1, 1, 100.0, 'Regular single room');

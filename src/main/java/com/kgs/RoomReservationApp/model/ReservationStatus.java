@@ -1,5 +1,10 @@
 package com.kgs.RoomReservationApp.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 public enum ReservationStatus {
   SUSPENDED(0),
   ACTIVE(1),
@@ -7,8 +12,6 @@ public enum ReservationStatus {
   CANCELLED(3);
 
   private int number;
-
-  ReservationStatus(int number) {}
 
   public static ReservationStatus getReservationStatusForNumber(int number) {
     return switch (number) {

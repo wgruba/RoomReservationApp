@@ -17,7 +17,7 @@ public class ReservationDao {
 
   private final JdbcTemplate jdbcTemplate;
 
-  public List<ReservationWithDetails> getAllWithDetailsByClientId(long userId) {
+  public List<ReservationWithDetails> getAllWithDetailsByClientId(long clientId) {
     return jdbcTemplate.query(
         """
               SELECT res.*, rooms.max_people_number, rooms.daily_price, types.type_name FROM reservations res
@@ -28,7 +28,7 @@ public class ReservationDao {
               ORDER BY res.start DESC
         """,
         this::mapToReservationWithDetails,
-        userId);
+        clientId);
   }
 
   public Optional<ReservationWithDetails> getWithDetailsById(long reservationId) {
@@ -47,7 +47,10 @@ public class ReservationDao {
   }
 
   public void cancel(long reservationId) {
-    jdbcTemplate.update("UPDATE reservations SET status = 3 WHERE id = ?", reservationId);
+    jdbcTemplate.update(
+        "UPDATE reservations SET status = ? WHERE id = ?",
+        ReservationStatus.CANCELLED.getNumber(),
+        reservationId);
   }
 
   private Reservation mapToReservation(ResultSet rs, int rowNum) throws SQLException {
