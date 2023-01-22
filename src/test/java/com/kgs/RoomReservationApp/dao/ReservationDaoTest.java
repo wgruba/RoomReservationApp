@@ -1,12 +1,9 @@
 package com.kgs.RoomReservationApp.dao;
 
+import static com.kgs.RoomReservationApp.utils.TestDataProvider.getReservationWithDetails;
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.kgs.RoomReservationApp.model.Reservation;
 import com.kgs.RoomReservationApp.model.ReservationStatus;
-import com.kgs.RoomReservationApp.model.ReservationWithDetails;
-import java.time.Duration;
-import java.time.Instant;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,19 +29,7 @@ class ReservationDaoTest {
   @Test
   void shouldGetAllReservationsWithDetailsByClientId() {
     int clientId = 1;
-    var expected =
-        List.of(
-            new ReservationWithDetails(
-                new Reservation(
-                    1,
-                    1,
-                    Instant.EPOCH,
-                    Instant.EPOCH.plus(Duration.ofDays(2)),
-                    ReservationStatus.ACTIVE,
-                    "comments"),
-                1,
-                100.0,
-                "Regular"));
+    var expected = List.of(getReservationWithDetails());
     var actual = reservationDao.getAllWithDetailsByClientId(clientId);
 
     assertEquals(expected, actual);
@@ -53,18 +38,7 @@ class ReservationDaoTest {
   @Test
   void shouldGetReservationWithDetailsById() {
     int reservationId = 1;
-    var expected =
-        new ReservationWithDetails(
-            new Reservation(
-                1,
-                1,
-                Instant.EPOCH,
-                Instant.EPOCH.plus(Duration.ofDays(2)),
-                ReservationStatus.ACTIVE,
-                "comments"),
-            1,
-            100.0,
-            "Regular");
+    var expected = getReservationWithDetails();
     var actual = reservationDao.getWithDetailsById(reservationId);
 
     assertEquals(expected, actual.orElse(null));
