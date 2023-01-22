@@ -25,7 +25,7 @@
                 <td class="text-center" th:text= "${reservation.peopleNumber()}"></td>
                 <td class="text-center" th:text= "${reservation.reservation().getStatus()}"></td>
                 <td class="text-center" th:text= "${reservation.getFullPayment()}"></td>
-                <td><a class="btn btn-lg btn-primary" th:href="@{/reservations/details(id=${reservation.reservation().getId()})}">Szczegóły</a></td>
+                <td><a id="details" class="btn btn-lg btn-primary" th:href="@{/reservations/details(id=${reservation.reservation().getId()})}">Szczegóły</a></td>
               </tr>
               </tbody>
             </table>
