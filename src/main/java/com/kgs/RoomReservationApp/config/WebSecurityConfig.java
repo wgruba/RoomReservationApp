@@ -17,7 +17,6 @@ public class WebSecurityConfig {
     http.authorizeHttpRequests(
             (requests) -> requests.requestMatchers("/").permitAll().anyRequest().authenticated())
         .formLogin();
-
     return http.build();
   }
 

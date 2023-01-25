@@ -20,12 +20,12 @@ public class ReservationDao {
   public List<ReservationWithDetails> getAllWithDetailsByClientId(long clientId) {
     return jdbcTemplate.query(
         """
-              SELECT res.*, rooms.max_people_number, rooms.daily_price, types.type_name FROM reservations res
-              JOIN room_reservation rr ON res.id = rr.reservation_id
-              JOIN rooms ON rr.room_id  = rooms.id
-              JOIN room_types types ON rooms.room_type_id = types.id
+              SELECT res.*, rooms.max_people_number, rooms.daily_price, room_types.type_name
+              FROM reservations res
+              JOIN room_reservation rr ON res.id=rr.reservation_id
+              JOIN rooms ON rr.room_id = rooms.id
+              JOIN room_types ON rooms.room_type = room_types.id
               WHERE res.user_id = ?
-              ORDER BY res.start DESC
         """,
         this::mapToReservationWithDetails,
         clientId);
@@ -38,7 +38,7 @@ public class ReservationDao {
                   SELECT res.*, rooms.max_people_number, rooms.daily_price, types.type_name FROM reservations res
                   JOIN room_reservation rr ON res.id = rr.reservation_id
                   JOIN rooms ON rr.room_id  = rooms.id
-                  JOIN room_types types ON rooms.room_type_id = types.id
+                  JOIN room_types types ON rooms.room_type = types.id
                   WHERE res.id = ?
                   ORDER BY res.start DESC
             """,

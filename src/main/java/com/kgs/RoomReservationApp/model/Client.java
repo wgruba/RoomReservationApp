@@ -17,6 +17,11 @@ public class Client extends User {
   private String phoneNumber;
 
   @Override
+  public String getUserName(){
+    return this.email;
+  }
+
+  @Override
   public String getRoles() {
     return "CLIENT";
   }
