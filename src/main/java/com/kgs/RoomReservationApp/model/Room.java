@@ -1,4 +1,4 @@
-package com.kgs.RoomReservationApp.Model;
+package com.kgs.RoomReservationApp.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class Room {
   private long id;
-  private RoomType roomType;
+  private String roomType;
   private long hotelId;
   private int maxPeopleNumber;
   private double dailyPrice;

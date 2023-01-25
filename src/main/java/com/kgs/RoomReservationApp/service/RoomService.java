@@ -1,7 +1,7 @@
-package com.kgs.RoomReservationApp.Service;
+package com.kgs.RoomReservationApp.service;
 
-import com.kgs.RoomReservationApp.Dao.RoomDao;
-import com.kgs.RoomReservationApp.Model.Room;
+import com.kgs.RoomReservationApp.dao.RoomDao;
+import com.kgs.RoomReservationApp.model.Room;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
