@@ -62,6 +62,9 @@ public class ReservationDao {
         ReservationStatus.getReservationStatusForNumber(rs.getInt("status")),
         rs.getString("comments"));
   }
+  private String mapToFullName(ResultSet rs,  int rowNum) throws SQLException{
+    return new String(rs.getString("first_name") + " " + rs.getString("last_name"));
+  }
 
   private ReservationWithDetails mapToReservationWithDetails(ResultSet rs, int rowNum)
       throws SQLException {

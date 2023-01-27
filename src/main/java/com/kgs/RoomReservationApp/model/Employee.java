@@ -23,7 +23,6 @@ public class Employee extends User{
     public String getRoles() {
         return "EMPLOYEE";
     }
-
     @Override
     public boolean isActive() {
         return true;

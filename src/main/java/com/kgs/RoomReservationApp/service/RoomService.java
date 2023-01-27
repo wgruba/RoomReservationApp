@@ -14,5 +14,4 @@ public class RoomService {
 
   public List<Room> getAll() {
     return roomDao.getAll();
-  }
-}
+  }}

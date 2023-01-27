@@ -16,7 +16,7 @@ public class WebSecurityConfig {
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http.authorizeHttpRequests()
             .requestMatchers("/reservations/details").hasAuthority("CLIENT")
-            .requestMatchers("/").hasAuthority("EMPLOYEE")
+            .requestMatchers("/employees/").hasAuthority("EMPLOYEE")
             .anyRequest().authenticated()
             .and()
             .formLogin();

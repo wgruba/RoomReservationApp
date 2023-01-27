@@ -16,15 +16,15 @@ public class ReservationController {
   @GetMapping("/reservations/")
   public String getAll(Model model) {
     var reservations = reservationService.getAllForClient(1L);
-
     model.addAttribute("reservations", reservations);
 
     return "reservations/index";
   }
 
   @GetMapping("/reservations/details")
-  public String details(@RequestParam("id") long inputId, Model model) {
+  public String details(@RequestParam("id") long inputId , Model model) {
     model.addAttribute("reservation", reservationService.getById(inputId));
+
     return "/reservations/details";
   }
 

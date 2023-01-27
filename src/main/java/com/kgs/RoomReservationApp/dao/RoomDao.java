@@ -20,6 +20,8 @@ public class RoomDao {
         this::mapToRoom);
   }
 
+
+
   private Room mapToRoom(ResultSet rs, int rowNum) throws SQLException {
     return new Room(
         rs.getLong("r.id"),

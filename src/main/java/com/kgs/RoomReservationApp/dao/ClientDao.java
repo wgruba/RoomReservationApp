@@ -20,6 +20,16 @@ public class ClientDao {
             "SELECT * FROM clients WHERE email = ?", this::mapToClient, email));
   }
 
+  public Optional<Client> getClientByReservationId(long reservationId){
+    return Optional.ofNullable(
+            jdbcTemplate.queryForObject("""
+            SELECT clients.*
+            FROM clients
+            JOIN reservations ON clients.id = reservations.user_id
+            WHERE reservations.id = ?
+            """,this::mapToClient,reservationId));
+  }
+
   private Client mapToClient(ResultSet rs, int rowNum) throws SQLException {
     return new Client(
         rs.getLong("id"),
