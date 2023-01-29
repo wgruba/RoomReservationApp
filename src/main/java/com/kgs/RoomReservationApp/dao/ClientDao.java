@@ -3,6 +3,7 @@ package com.kgs.RoomReservationApp.dao;
 import com.kgs.RoomReservationApp.model.Client;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -19,15 +20,23 @@ public class ClientDao {
         jdbcTemplate.queryForObject(
             "SELECT * FROM clients WHERE email = ?", this::mapToClient, email));
   }
+  public Optional<Integer> updateClient(Client client){
+    return  Optional.ofNullable(
+            jdbcTemplate.update("""
+            UPDATE clients
+            SET fist_name= ?, last_name = ?,phone_number = ?,email = ?
+            WHERE id = ?
+            """,client.getFistName(),client.getLastName(),client.getPhoneNumber(),client.getEmail(),client.getId()));
+  }
 
-  public Optional<Client> getClientByReservationId(long reservationId){
-    return Optional.ofNullable(
+  public Client getClientByReservationId(long reservationId){
+    return
             jdbcTemplate.queryForObject("""
             SELECT clients.*
             FROM clients
             JOIN reservations ON clients.id = reservations.user_id
             WHERE reservations.id = ?
-            """,this::mapToClient,reservationId));
+            """,this::mapToClient,reservationId);
   }
 
   private Client mapToClient(ResultSet rs, int rowNum) throws SQLException {

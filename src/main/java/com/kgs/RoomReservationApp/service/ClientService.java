@@ -6,6 +6,7 @@ import com.kgs.RoomReservationApp.model.Client;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -14,7 +15,10 @@ public class ClientService {
 
     private final ClientDao clientDao;
 
-    public Optional<Client> findClientAssignToReservation(long reservationId){
+    public Client findClientAssignToReservation(long reservationId){
         return clientDao.getClientByReservationId(reservationId);
+    }
+    public void updateClient(Client client){
+        clientDao.updateClient(client);
     }
 }

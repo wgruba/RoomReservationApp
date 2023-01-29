@@ -1,6 +1,7 @@
 package com.kgs.RoomReservationApp.service;
 
 import com.kgs.RoomReservationApp.dao.ReservationDao;
+import com.kgs.RoomReservationApp.model.Reservation;
 import com.kgs.RoomReservationApp.model.ReservationStatus;
 import com.kgs.RoomReservationApp.model.ReservationWithDetails;
 import java.util.List;
@@ -17,6 +18,11 @@ public class ReservationService {
 
   public List<ReservationWithDetails> getAllForClient(long clientId) {
     cachedReservations = reservationDao.getAllWithDetailsByClientId(clientId);
+    return cachedReservations;
+  }
+
+  public List<ReservationWithDetails> getAll() {
+    cachedReservations = reservationDao.getAll();
     return cachedReservations;
   }
 
@@ -37,6 +43,12 @@ public class ReservationService {
           .ifPresent(
               reservation -> reservation.reservation().setStatus(ReservationStatus.CANCELLED));
     }
+  }
+  public void updateReservation(Reservation reservation){
+    reservationDao.updateReservation(reservation);
+  }
+  public void updateReservedRoom(long reservationId, long roomId){
+    reservationDao.updateReservedRoom(reservationId,roomId);
   }
 
   private Optional<ReservationWithDetails> findFromCache(long id) {

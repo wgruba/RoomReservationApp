@@ -1,16 +1,19 @@
 package com.kgs.RoomReservationApp.controller;
 
+import com.kgs.RoomReservationApp.model.Client;
+import com.kgs.RoomReservationApp.model.Reservation;
+import com.kgs.RoomReservationApp.model.Room;
 import com.kgs.RoomReservationApp.service.ClientService;
 import com.kgs.RoomReservationApp.service.ReservationService;
 import com.kgs.RoomReservationApp.service.RoomService;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class EmployeeController {
     private final ReservationService reservationService;
     private final ClientService clientService;
@@ -18,10 +21,8 @@ public class EmployeeController {
 
     @GetMapping("/employees/")
     public String getAll(Model model) {
-        var reservations = reservationService.getAllForClient(1L);
-
+        var reservations = reservationService.getAll();
         model.addAttribute("reservations", reservations);
-
         return "employees/index";
     }
 
@@ -31,4 +32,21 @@ public class EmployeeController {
         model.addAttribute("client", clientService.findClientAssignToReservation(inputId));
         return "/employees/details";
     }
+    @GetMapping("/employees/{id}/edit")
+    public String edit(@PathVariable long id, Model model) {
+        model.addAttribute("client", clientService.findClientAssignToReservation(id));
+        model.addAttribute("reservation", reservationService.getById(id));
+        model.addAttribute("reservation_reservation", reservationService.getById(id).reservation());
+        model.addAttribute("room",roomService.getRoomForReservation(id).get());
+        return "/employees/edit";
+    }
+
+    @RequestMapping(value = {"/employees/edit"})
+    public String edit(@ModelAttribute("client") Client client, @ModelAttribute("reservation_reservation") Reservation reservation,@ModelAttribute("room") Room room) {
+        clientService.updateClient(client);
+        reservationService.updateReservation(reservation);
+        roomService.updateReservedRoom(room, reservation.getId());
+        return "redirect:/employees/";
+    }
+
 }

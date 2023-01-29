@@ -3,6 +3,7 @@ package com.kgs.RoomReservationApp.dao;
 import com.kgs.RoomReservationApp.model.Reservation;
 import com.kgs.RoomReservationApp.model.ReservationStatus;
 import com.kgs.RoomReservationApp.model.ReservationWithDetails;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -29,6 +30,37 @@ public class ReservationDao {
         """,
         this::mapToReservationWithDetails,
         clientId);
+  }
+  public List<ReservationWithDetails> getAll() {
+    return jdbcTemplate.query(
+            """
+                  SELECT res.*, rooms.max_people_number, rooms.daily_price, room_types.type_name
+                  FROM reservations res
+                  JOIN room_reservation rr ON res.id=rr.reservation_id
+                  JOIN rooms ON rr.room_id = rooms.id
+                  JOIN room_types ON rooms.room_type = room_types.id
+            """,
+            this::mapToReservationWithDetails);
+  }
+
+  public Optional<Integer> updateReservation(Reservation reservation){
+        return Optional.ofNullable(
+                jdbcTemplate.update("""
+              UPDATE reservations
+              SET status= ?, comments = ?
+              WHERE id = ?
+              """,reservation.getStatus().getNumber(),reservation.getComments(),reservation.getId())
+              );
+  }
+
+  public Optional<Integer> updateReservedRoom(long reservationId, long roomId){
+    return Optional.ofNullable(
+            jdbcTemplate.update("""
+              UPDATE room_reservation
+              SET room_id = ?
+              WHERE reservation_id = ?
+              """,roomId,reservationId)
+    );
   }
 
   public Optional<ReservationWithDetails> getWithDetailsById(long reservationId) {

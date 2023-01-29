@@ -1,10 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="_shared/_layout">
 
-</body>
+<title layout:fragment="title">KGW - edycja rezerwacji</title>
+
+<div layout:fragment="content">
+    <div class="content">
+        <h1 style="padding-left: 60px;"><strong>Szczegóły</strong></h1>
+        <hr style="height:2px; border-width:1px; color:black; background-color:black">
+
+        <h2 style="padding-left: 60px;"><strong>Dane Osobowe</strong></h2>
+        <form action="#" th:action="@{/employees/edit}" method="post">
+        <div th:object="${client}">
+            <div style="padding-left: 30px;">
+                id:  <input type="text" th:value="*{getId()}" th:field="*{id}" readonly/><br><br>
+                Imię: <input type="text" th:value="*{getFistName()}" th:field="*{fistName}" required/><br><br>
+                Nazwisko: <input type="text" th:value="*{getLastName()}" th:field="*{lastName}" required/><br><br>
+                Email: <input type="email" th:value="*{getEmail()}" th:field="*{email}" required/><br><br>
+                Numer Telefonu: <input type="tel" th:value="*{getPhoneNumber()}" th:field="*{phoneNumber}" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}"/><br><br>
+            </div>
+        </div>
+            <div th:object="${reservation_reservation}">
+                Id Rezerwacji: <input type="text" th:value="*{getId()}" th:field="*{id}"  readonly/><br><br>
+                Dodatkowe uwagi: <input type="text" th:value="*{getComments()}" th:field="*{comments}"/><br><br>
+            <hr style="height:2px; border-width:1px; color:black; background-color:black">
+            <div style="padding-left: 30px;">
+                Czas rezerwacji: od <text th:text="*{getStart()}"></text>  do <text th:text="*{getEnd()}"></text><br><br>
+            </div>
+            <hr style="height:2px; border-width:1px; color:black; background-color:black">
+                Status Rezerwacji: <input type="tel" th:value="*{getStatus()}" th:field="*{status}"/><br><br>
+            </div>
+            <div th:object="${reservation}">
+            <div>
+                <div style="padding-left: 30px;">
+                    Numer Pokoju: <input type="number" th:object="${room}" th:value="*{id}" required/>
+                    Ilość osób: <input type="number" th:value="*{peopleNumber()}"/>
+                    Rodzaj pokoju: <input type="number" th:value="*{roomType()}"/>
+                    Cena:  <input type="number" th:value="*{getFullPayment()}" th:field="*{fullPayment}"/>
+                </div>
+            </div>
+            </div>
+            <button type="submit"> Zapisz </button>
+            <input type="reset" value="Reset" />
+        </form>
+    </div>
+</div>
 </html>
