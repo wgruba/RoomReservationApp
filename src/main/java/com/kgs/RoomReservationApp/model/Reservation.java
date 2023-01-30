@@ -14,7 +14,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Reservation {
+public class  Reservation {
   @Id
   private long id;
   private long userId;

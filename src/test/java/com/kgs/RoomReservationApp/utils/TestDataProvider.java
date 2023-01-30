@@ -1,5 +1,6 @@
 package com.kgs.RoomReservationApp.utils;
 
+import com.kgs.RoomReservationApp.model.Client;
 import com.kgs.RoomReservationApp.model.Reservation;
 import com.kgs.RoomReservationApp.model.ReservationStatus;
 import com.kgs.RoomReservationApp.model.ReservationWithDetails;

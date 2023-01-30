@@ -16,11 +16,11 @@
 
         <div th:object="${client}">
             <div style="padding-left: 30px;">
-                Imię: <text th:text="${client.getFistName()}"></text><br><br>
-                Nazwisko: <text th:text="${client.getLastName()}"></text><br><br>
-                Email: <text th:text="${client.getEmail()}"></text><br><br>
-                Numer Telefonu: <text th:text="${client.getPhoneNumber()}"></text><br><br>
-                Dodatkowe uwagi: <text th:text="${reservation.reservation().getComments()}"></text><br><br>
+                Imię: <text id="first_name" th:text="${client.getFistName()}"></text><br><br>
+                Nazwisko: <text id="last_name" th:text="${client.getLastName()}"></text><br><br>
+                Email: <text id="email" th:text="${client.getEmail()}"></text><br><br>
+                Numer Telefonu: <text id="phone_number" th:text="${client.getPhoneNumber()}"></text><br><br>
+                Dodatkowe uwagi: <text id="Comments" th:text="${reservation.reservation().getComments()}"></text><br><br>
             </div>
 
         <div th:object="${reservation}">
@@ -41,10 +41,10 @@
         </div>
 
         <div class="text-right" style="margin-right:20px">
-            <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#cancelModal">Edytuj</button>
+            <button type="button" id="edit_button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#cancelModal">Edytuj</button>
         </div>
         <div class="text-left" style="margin-left:20px">
-            <a class="btn btn-primary" href="/employees/"> Powrót </a>
+            <a class="btn btn-primary" id="goBack" href="/employees/"> Powrót </a>
          </div>
 
         <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -56,8 +56,8 @@
                         <br><br>
                     </div>
                     <div class="modal-footer">
-                        <a class="btn btn-lg btn-danger" th:href="@{/employees/{id}/edit(id=${reservation.reservation().getId()})}"> Tak </a>
-                        <button type="button" class="btn btn-lg btn-primary" data-dismiss="modal">Nie</button>
+                        <a class="btn btn-lg btn-danger" id="edit" th:href="@{/employees/{id}/edit(id=${reservation.reservation().getId()})}"> Tak </a>
+                        <button type="button" id="no" class="btn btn-lg btn-primary" data-dismiss="modal">Nie</button>
                     </div>
                 </div>
             </div>

@@ -2,6 +2,8 @@ package com.kgs.RoomReservationApp;
 
 import static com.kgs.RoomReservationApp.utils.TestDataProvider.getReservationWithDetails;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.springframework.test.util.AssertionErrors.assertFalse;
 
 import java.time.Duration;
 import org.junit.jupiter.api.Test;
@@ -22,24 +24,15 @@ import org.springframework.test.context.jdbc.Sql;
 class ReservationFunctionalTests {
   @LocalServerPort private int port;
 
-  //    Scenario: Display reservation details page
-  //    Given I am on the login page
-  //    When I fill the field User with <user>
-  //    And I fill the field Password with <password>
-  //    And I press "SIGN IN" button
-  //    Then I should be on the Reservations list page
-  //    When I press "SZCZEGÓŁY" button of <reservation>
-  //    Then I should be on <reservation> details page
-
   @Test
-  void shouldDisplayReservationDetailsPage() {
+  void shouldEditReservationDetails() {
     System.setProperty(
-        "webdriver.chrome.driver", "/home/m.kazmierczak/Documents/chromedriver/chromedriver");
-    String user = "j.smith@mail.com";
-    String password = "pass";
+        "webdriver.chrome.driver", "D:\\Intelij_Ultimate\\RoomReservationApp\\chromedriver.exe");
+    String user = "Employee1KGW";
+    String password = "employee1";
     var expectedReservation = getReservationWithDetails();
     WebDriver driver = new ChromeDriver();
-    driver.get(String.format("http://localhost:%d/reservations/", port));
+    driver.get("http://localhost:8080/employees/details?id=1");
 
     var usernameInput = driver.findElement(By.id("username"));
     var passwordInput = driver.findElement(By.id("password"));
@@ -48,17 +41,75 @@ class ReservationFunctionalTests {
     passwordInput.sendKeys(password);
 
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10L));
-    var signButton = driver.findElement(By.className("btn"));
+    var signButton = driver.findElement(By.xpath("//button[@type='submit']"));
+
     signButton.click();
 
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10L));
+    var editButton = driver.findElement(By.id("edit_button"));
+    editButton.click();
+
+    var buttonNo = driver.findElement(By.id("no"));
+    buttonNo.click();
+
+
+    var buttonYes = driver.findElement(By.id("edit"));
+
+    editButton.click();
+    buttonYes.click();
+
+    var emailField = driver.findElement(By.id("email"));
+    var firstNameField = driver.findElement(By.id("first_name"));
+    var lastNameField = driver.findElement(By.id("last_name"));
+    var NoRoom = driver.findElement(By.id("NoRoom"));
+    var saveButton = driver.findElement(By.id("save"));
+    var statusField = driver.findElement(By.id("status"));
+
+    emailField.clear();
+    emailField.sendKeys("AleEmail...");
+    NoRoom.clear();
+    NoRoom.sendKeys("Room");
+
+    saveButton.click();
+    assertTrue(firstNameField.isDisplayed());
+
+    var exampleEmail = "alaGaj@example.com";
+    var exampleFName= "Alicja";
+    var exampleLName = "Gaj";
+    var exampleStatus = "ACTIVE";
+    var exampleNoRoom = "1";
+
+    emailField.clear();
+    emailField.sendKeys(exampleEmail);
+
+    firstNameField.clear();
+    firstNameField.sendKeys(exampleFName);
+
+    lastNameField.clear();
+    lastNameField.sendKeys(exampleLName);
+
+    statusField.clear();
+    statusField.sendKeys(exampleStatus);
+
+    NoRoom.clear();
+    NoRoom.sendKeys(exampleNoRoom);
+
+    saveButton.click();
+
     var detailsButton = driver.findElement(By.id("details"));
+    assertTrue(detailsButton.isDisplayed());
+
     detailsButton.click();
 
+    var emailText = driver.findElement(By.id("email")).getText();
+    var firstNameText = driver.findElement(By.id("first_name")).getText();
+    var lastNameText = driver.findElement(By.id("last_name")).getText();
     var statusText = driver.findElement(By.id("status")).getText();
-    var roomTypeText = driver.findElement(By.id("room_type")).getText();
 
     assertEquals(expectedReservation.reservation().getStatus().toString(), statusText);
-    assertEquals(expectedReservation.roomType(), roomTypeText);
+    assertEquals(exampleEmail,emailText);
+    assertEquals(exampleFName,firstNameText);
+    assertEquals(exampleLName,lastNameText);
+
   }
 }

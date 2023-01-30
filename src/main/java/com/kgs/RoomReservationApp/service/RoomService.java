@@ -26,6 +26,4 @@ public class RoomService {
     return roomDao.getRoomForReservation(reservationId);
   }
 
-
-
 }

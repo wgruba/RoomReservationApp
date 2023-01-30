@@ -26,8 +26,7 @@ class ReservationServiceTest {
 
   @Test
   void shouldGetAllReservationsForClient() {
-    int clientId = 1;
-    var actual = reservationService.getAllForClient(clientId);
+    var actual = reservationService.getAll();
     var expected = List.of(getReservationWithDetails());
 
     assertEquals(expected, actual);
